@@ -74,3 +74,13 @@ azure:
   keyvault:
     enabled: true
     uri: ${AZURE_KEY_VAULT_URI}
+
+---
+spring:
+  profiles: communications
+  
+spring:
+  jms:
+    servicebus:
+      connection-string: ${SERVICE_BUS_CONNECTION_STRING}
+      idle-timeout: ${SERVICE_BUS_DEFAULT_IDLE_TIMEOUT}
