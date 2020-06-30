@@ -78,8 +78,6 @@ azure:
 ---
 spring:
   profiles: communications
-  
-spring:
   jms:
     servicebus:
       connection-string: ${SERVICE_BUS_CONNECTION_STRING}
