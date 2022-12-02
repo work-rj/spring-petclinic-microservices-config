@@ -16,3 +16,15 @@ server:
 
 # Internationalization
 spring.messages.basename: messages/messages
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  zipkin:
+    baseUrl: http://tracing-server:9411
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka/
