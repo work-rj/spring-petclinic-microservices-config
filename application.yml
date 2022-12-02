@@ -24,8 +24,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: none
-  jmx:
-    enabled: true
 
 # Spring Boot 1.5 makes actuator secure by default
 management.security.enabled: false
@@ -35,7 +33,6 @@ management.endpoints.web.exposure.include: "*"
 # Temporary hack required by the Spring Boot 2 / Spring Cloud Finchley branch
 # Waiting issue https://github.com/spring-projects/spring-boot/issues/13042
 spring.cloud.refresh.refreshable: false
-
 
 # Logging
 logging.level.org.springframework: INFO
@@ -50,7 +47,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   metrics:
     export:
       prometheus:
@@ -61,7 +58,7 @@ management:
 spring:
   config:
     activate:
-      on-profile: chaos-monkey      
+      on-profile: chaos-monkey
 management.endpoint.chaosmonkey.enabled: true
 chaos:
   monkey:
@@ -78,24 +75,12 @@ spring:
   config:
     activate:
       on-profile: mysql
+  sql.init.mode: always
+  sql.init.platform: mysql
   datasource:
     schema: classpath*:db/mysql/schema.sql
     data: classpath*:db/mysql/data.sql
-    url: jdbc:mysql://${MYSQL_SERVER_FULL_NAME}:3306/${MYSQL_DATABASE_NAME}?useSSL=false
-    username: ${MYSQL_SERVER_ADMIN_LOGIN_NAME}
-    password: ${MYSQL_SERVER_ADMIN_PASSWORD}
+    url: jdbc:mysql://localhost:3306/petclinic?useSSL=false
+    username: root
+    password: petclinic
     initialization-mode: ALWAYS
-
----
-spring:
-  profiles: key-vault
-
-MYSQL_SERVER_FULL_NAME: ${MYSQL-SERVER-FULL-NAME}
-MYSQL_DATABASE_NAME: ${MYSQL-DATABASE-NAME}
-MYSQL_SERVER_ADMIN_LOGIN_NAME: ${MYSQL-SERVER-ADMIN-LOGIN-NAME}
-MYSQL_SERVER_ADMIN_PASSWORD: ${MYSQL-SERVER-ADMIN-PASSWORD}
-
-azure:
-  keyvault:
-    enabled: true
-    uri: ${AZURE_KEY_VAULT_URI}
