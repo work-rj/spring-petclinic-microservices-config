@@ -96,3 +96,14 @@ spring:
       connection-string: ${spring.jms.servicebus.connection-string}
       idle-timeout: 60000
       pricing-tier: premium
+  kafka:
+    bootstrap-servers: evhns-petclinic-be28c8.servicebus.windows.net:9093
+    client-id: first-service
+    group-id: $Default
+    properties:
+      sasl.jaas.config: 
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+      spring.json:
+        use.type.headers: false
+        value.default.type: com.targa.labs.dev.telemetrystation.Message
