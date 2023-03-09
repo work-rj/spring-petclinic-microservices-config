@@ -91,3 +91,8 @@ spring:
           - name: key-vault-property-source-1
             endpoint: https://kv-petclinic-be28c8.vault.azure.net/
             credential.managed-identity-enabled: true
+  jms:
+    servicebus:
+      connection-string: ${spring.jms.servicebus.connection-string}
+      idle-timeout: 60000
+      pricing-tier: premium
